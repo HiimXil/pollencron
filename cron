@@ -1,0 +1,1 @@
+* * * * * /app/script.sh >> /app/log 2>&1
