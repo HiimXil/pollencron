@@ -1,1 +1,1 @@
-* * * * * /app/script.sh >> /app/log 2>&1
+30 6 * * * /app/script.sh >> /app/log 2>&1
