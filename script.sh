@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script to run pollen cron job
-res=$(curl -s https://www.pollens.fr/risks/thea/counties/91)
+res=$(curl -s https://www.pollens.fr/risks/thea/counties/"$DEPARTEMENT")
 # Take pollen Name and his level
 lvlBouleau=$(echo "$res" | jq -r '.risks[] | select(.pollenName == "Bouleau") | .level')
 lvlavg=$(echo "$res" | jq '[.risks[] | .level ]| add/length')

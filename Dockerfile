@@ -1,11 +1,6 @@
 FROM ubuntu:20.04
 RUN apt-get update && apt-get install cron curl jq bc -y
 
-# copy cron to folder get permission and add it to crontab
-COPY cron /etc/cron.d/pollencron
-RUN chmod 0644 /etc/cron.d/pollencron
-RUN crontab /etc/cron.d/pollencron
-
 # create log file
 WORKDIR /app
 RUN touch log
