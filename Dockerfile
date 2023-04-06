@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04-slim
 RUN apt-get update && apt-get install cron curl jq bc -y
 
 # create log file
