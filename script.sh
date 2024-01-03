@@ -8,7 +8,7 @@ lvlGramine=$(echo "$res" | jq -r '.risks[] | select(.pollenName == "Gramin\u00e9
 lvlavg=$(echo "$res" | jq '[.risks[] | .level ]| add/length')
 # Send message to discord
 if [ "$lvlBouleau" -gt 2 ] || [ "$lvlGramine" -gt 2 ] || [ "$(echo "$lvlavg>=1"| bc)" -eq 1 ]; then
-    curl  -s -X POST -H "Content-Type: application/json" -d '{"content":"ALERTE <@'"$DISCORD_ID"'> \nNiveau de pollen pour le Bouleau : '"$lvlBouleau"' \nNiveau de pollen pour les Gramine : '"$lvlGramine"' \nNiveau moyen de pollen moyen : '"$lvlavg"'"}' "$DISCORD_WEBHOOK"
+    curl  -s -X POST -H "Content-Type: application/json" -d '{"content":"ALERTE <@'"$DISCORD_ID"'>","embeds": [{"title": "Pollen💐","url": "https://pollens.fr/","fields": [{"name": "🌼Niveau de pollen pour le Bouleau :","value": "'"$lvlBouleau"'"},{"name": "🌼Niveau de pollen pour les Gramine :","value": "'"$lvlGramine"'"},{"name": "🌼Niveau moyen de pollen moyen :","value": "'"$lvlavg"'"}],"footer": {"icon_url": "https://slate.dan.onl/slate.png"}}]}' "$DISCORD_WEBHOOK"
 else
-    curl  -s -X POST -H "Content-Type: application/json" -d '{"content":"Niveau de pollen pour le Bouleau : '"$lvlBouleau"' \nNiveau de pollen pour les Gramines : '"$lvlGramine"' \nNiveau moyen de pollen moyen : '"$lvlavg"'"}' "$DISCORD_WEBHOOK"
+    curl  -s -X POST -H "Content-Type: application/json" -d '{"embeds": [{"title": "Pollen💐","url": "https://pollens.fr/","fields": [{"name": "🌼Niveau de pollen pour le Bouleau :","value": "'"$lvlBouleau"'"},{"name": "🌼Niveau de pollen pour les Gramine :","value": "'"$lvlGramine"'"},{"name": "🌼Niveau moyen de pollen moyen :","value": "'"$lvlavg"'"}],"footer": {"icon_url": "https://slate.dan.onl/slate.png"}}]}' "$DISCORD_WEBHOOK"
 fi
